@@ -51,7 +51,7 @@ vector<double> GenerateWaypoint( void);
 bool CheckStateChange(void);
 void SetBestLane(void);
 bool check_safe(int lane);
-bool setAccerate(void);
+//bool setAccerate(void);
 void StateManagement(void);
 };
 

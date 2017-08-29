@@ -216,31 +216,6 @@ PTG::S_D  PTG::build_trajectory(vector<double> trajectory) {
 
 	double time = 0;
 
-	/*double time = 0;
-	if (our_path->ref_velocity > 20) {
-		time = 0;
-	}
-	if (our_path->ref_velocity > 30) {
-		time = .7;
-	}
-	if (our_path->ref_velocity > 40) {
-		time = .9;
-	}
-
-	if (our_path->lane_change_state == true) {
-		time = 2.9;
-		if (our_path->ref_velocity > 40) {
-			time = 3.7;
-		}
-		if (our_path->ref_velocity > 43) {
-			time = 3.8;
-		}
-	}*/
-	
-
-
-
-
 
 	double end_time = (trajectory[12]) ;
 
@@ -415,14 +390,6 @@ vector<double> PTG::GenerateWaypoint( void){
     ptsy[i] = (shift_x * sin(0 - ref_yaw) + shift_y * cos(0 - ref_yaw));
   }
 
-		/*for (auto x : ptsx)
-			std::cout << "x value is: " <<  x << endl;
-		std::cout << std::endl;
-
-		for (auto y : ptsy)
-			std::cout << "y value is: " << y << endl;
-		std::cout << std::endl;*/
-
   // create a spline
   tk::spline s;
 
@@ -555,54 +522,12 @@ bool PTG::check_safe(int lane){
 		if(veh_lane == lane){
 		// project s at next dt time
 			veh_s += ((waypoint_ds.previous_path_size)*dt*veh_v);
-			if((veh_s >= sdveh_s && ((veh_s - sdveh_s) <= buffer)) || (veh_s <= sdveh_s && ((sdveh_s  - veh_s) <= buffer)) ){
+			if((veh_s >= sdveh_s && ((veh_s - sdveh_s) <= buffer-10)) || (veh_s <= sdveh_s && ((sdveh_s  - veh_s) <= buffer-10)) ){
 				safe =  false;
 			}
 		}
 	}
 	return safe;
-}
-
-//Set Acc returns true if veh dist in lane > buffer 
-
-bool PTG::setAccerate(void){
-bool acc = true;
-float sdveh_s = 0;
-	bool safe = true;
-	if (waypoint_ds.previous_path_size > 2){
-	  sdveh_s = waypoint_ds.end_s;
-      	  
-	}
-	int sdveh_lane  = getLaneNumber(sd_veh.start_state[3]);
-	cout<<"check acc   function for SDVEh lane:  "<<sdveh_lane<<endl;
-	for (int i = 0 ; i< vehicle_list.size();i++){
-		Vehicle veh = vehicle_list[i];
-		float veh_d = veh.start_state[3];
-		float veh_s = veh.start_state[0];
-		float veh_v = veh._v;
-		int veh_lane  = getLaneNumber(veh_d);
-		
-		//cout<<"veh d: "<<veh_d<<" veh lane "<<veh_lane <<endl;
-		//cout<<"veh s: "<<veh_s<<endl;
-		//cout<<"v: "<<veh_v<<endl;
-		//cout<<"SD veh S:"<<sdveh_s<<endl;
-		if(veh_lane == sdveh_lane){
-		        // project s at next dt time
-			veh_s += ((waypoint_ds.previous_path_size/2)*dt*veh_v);
-			//cout<<"veh lane : "<<lane<<endl;
-			//cout<<"veh s in future: "<<veh_s<<endl;
-			//cout<<"veh s diff: "<<(veh_s - sdveh_s)<<endl;
-			//cout<<"Ref vel true: diff in S"<<(veh_s - sdveh_s) <<endl<<endl<<endl;
-			//cout<<"Ref vel true: diff in S"<<(sdveh_s  - veh_s) <<endl<<endl<<endl;
-			if((veh_s >= sdveh_s && ((veh_s - sdveh_s) <= buffer))){
-				
-				acc =  false;
-			}
-		}
-		
-	//cout<<"======================================================="<<endl;
-	}
-return acc;
 }
 
 

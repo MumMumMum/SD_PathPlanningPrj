@@ -182,7 +182,6 @@ int main() {
 PTG ptg;
 ptg.ref_velocity = 0;
 ptg.best_lane = lane_middle;
-//ptg.too_close = false;
 ptg.state_FSM = KL;
 
 h.onMessage([&]	(uWS::WebSocket<uWS::SERVER> ws, char 	*data, size_t length,uWS::OpCode opCode) {
@@ -243,14 +242,6 @@ h.onMessage([&]	(uWS::WebSocket<uWS::SERVER> ws, char 	*data, size_t length,uWS:
 		waypoint_ds.previous_path_size = previous_path_y.size();
 		
 
-		/*for (auto x : waypoint_ds.previous_path_x)
-			std::cout << "x value is: " <<  x << endl;
-		std::cout << std::endl;
-
-		for (auto y : waypoint_ds.previous_path_y)
-			std::cout << "y value is: " << y << endl;
-		std::cout << std::endl;*/
-		
           	// Sensor Fusion Data, a list of all other cars on the same side of the road.
           	auto sensor_fusion = j[1]["sensor_fusion"];
 		//cout<<"sensor:"<<sensor_fusion.size()<<endl;
@@ -268,11 +259,7 @@ h.onMessage([&]	(uWS::WebSocket<uWS::SERVER> ws, char 	*data, size_t length,uWS:
 			double d = sensor_state[6];
 			Vehicle veh = Vehicle(id,x,y,vx,vy,s,d);
 			vehicle_list.insert(std::pair<int,Vehicle>(id, veh));			
-			
- 			//cout<<"vehicle v:"<<newVeh._v <<"s : "<<newVeh.start_state[0]<<" s_ : "<<newVeh.start_state[1]
-			//<<"  s--: "<<newVeh.start_state[2]<<endl;
-			//cout<<"d : "<<newVeh.start_state[3]<<" d_ : "<<newVeh.start_state[2]<<"  d--: "<<newVeh.start_state[3]<<endl;
-		}
+			}
 		
 		
 		ptg.StateManagement();
