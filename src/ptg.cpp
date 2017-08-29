@@ -542,24 +542,24 @@ cout<<" SM::sdveh_lane in "<<sdveh_lane<<endl;
 if(state_FSM == KL){
 
 bool stateChange = CheckStateChange();
-if(stateChange) {state_FSM = PRP_LC;ref_vel -= (.224*9);}
+if(stateChange) {state_FSM = PRP_LC;ref_vel -= (.224*5);}
 else {state_FSM = KL;ref_vel += (.224*5);}
 
 }
 else if(state_FSM == PRP_LC ){
-ref_vel -= (.224*9);
+ref_vel -= (.224*5);
 if(ref_vel <= 35){
   state_FSM = LC;
   cout<<"SM::state_FSM : "<<state_FSM<<endl;
   }
 }
 else if(state_FSM == LC){
-ref_vel -= (.224*9);
+ref_vel -= (.224*5);
 SetBestLane();
 state_FSM = LC_Done;
 }
 else if(state_FSM == LC_Done){
-ref_vel -= (.224*9);
+ref_vel -= (.224*5);
 
 cout<<" SM::sdveh_lane in LC DONE st"<<sdveh_lane<<endl;
 if(sdveh_lane == best_lane)
