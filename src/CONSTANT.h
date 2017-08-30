@@ -13,7 +13,7 @@ const double T_diff = 4.0;                    //used in time diff cost, if time 
 const double SPEED_LIMIT = 49.5;
 
 const double  MPH_TO_METERS_PER_SEC = 2.24;   // MPH to meters-per-second, 2.24mph -> 1 m/s
-const double  SPLINE_SPACING = 30;            // 30 meters between spline segments
+const double  SPLINE_SPACING = 40;            // 30 meters between spline segments
 const int     MAX_TICKS = 30;                 // number of simulator "ticks" before behavior planner processing for ego
 const double  SECS_PER_TICK = 0.02;           // number of elapsed seconds per "tick" of simulator
 const int     HORIZON_DIST = 50;              // 50 meters

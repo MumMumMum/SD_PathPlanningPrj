@@ -461,7 +461,7 @@ bool  PTG::CheckStateChange(void){
 		
 		if(veh_lane == sdveh_lane ){
 		       // project s at next dt time
-			veh_s += ((waypoint_ds.previous_path_size/3)*dt*veh_v);
+			veh_s += ((waypoint_ds.previous_path_size)*dt*veh_v);
 			
 			//checks if time is good to start to decelarate
 			if(veh_s >= sdveh_s && ((veh_s - sdveh_s) <= buffer) ){
@@ -543,12 +543,12 @@ if(state_FSM == KL){
 
 bool stateChange = CheckStateChange();
 if(stateChange) {state_FSM = PRP_LC;ref_vel -= (.224*5);}
-else {state_FSM = KL;ref_vel += (.224*5);}
+else {state_FSM = KL;ref_vel += (.224*9);}
 
 }
 else if(state_FSM == PRP_LC ){
 ref_vel -= (.224*5);
-if(ref_vel <= 35){
+if(ref_vel <= 47){
   state_FSM = LC;
   cout<<"SM::state_FSM : "<<state_FSM<<endl;
   }
